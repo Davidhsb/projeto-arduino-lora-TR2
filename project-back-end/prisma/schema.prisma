@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Tank {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  capacity    Int
+  location    String
+  status      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  fuel_levels FuelLevel[]
+
+  @@map("tanks")
+}
+
+model FuelLevel {
+  id          Int      @id @default(autoincrement())
+  level       Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tank_id     Int  
+  tank        Tank     @relation(fields: [tank_id], references: [id])
+
+  @@map("fuel_levels")
+}
