@@ -24,7 +24,7 @@ void setup() {
     Serial.println("LoRa initialized successfully");
   }
 
-  rf95.setTxPower(23, false);  // Configura a potência de transmissão em dBm (23 dBm neste exemplo)
+  rf95.setTxPower(14, true);
 }
 
 void loop() {

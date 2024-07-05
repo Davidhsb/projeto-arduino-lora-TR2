@@ -18,8 +18,8 @@ void setup() {
     Serial.println("LoRa initialized successfully");
   }
 
-  rf95.setFrequency(915.0);  // Configura a frequência do LoRa em MHz
-  rf95.setTxPower(23, false);  // Configura a potência de transmissão em dBm (23 dBm neste exemplo)
+  rf95.setFrequency(915.0);
+  rf95.setTxPower(14, true); 
 }
 
 void loop() {
