@@ -8,7 +8,8 @@
 RH_RF95 rf95(RFM95_CS, RFM95_INT);
 
 const int trigPin = 3;
-const int echoPin = 2;
+const int echoPin = 4;
+float duration, distance;
 
 void setup() {
   pinMode(trigPin, OUTPUT);
@@ -28,33 +29,19 @@ void setup() {
 }
 
 void loop() {
-  // Realiza a medição de distância com o sensor ultrassônico
-  float distance = measureDistance();
-
-  // Envia a distância via LoRa
-  sendDistance(distance);
-
-  delay(2000);  // Intervalo entre cada envio de dados
-}
-
-float measureDistance() {
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
 
-  float duration = pulseIn(echoPin, HIGH);
-  float distance = (duration * 0.0343) / 2;
+  duration = pulseIn(echoPin, HIGH);
+  distance = (duration * 0.0343) / 2;
 
   Serial.print("Distancia: ");
   Serial.print(distance);
   Serial.println(" cm");
 
-  return distance;
-}
-
-void sendDistance(float distance) {
   // Prepara os dados para enviar
   String distanceStr = String(distance);
   uint8_t data[distanceStr.length() + 1];
@@ -64,5 +51,5 @@ void sendDistance(float distance) {
   rf95.send(data, sizeof(data));
   rf95.waitPacketSent();
 
-  Serial.println("Dados enviados via LoRa");
+  delay(2000);  // Intervalo entre cada envio de dados
 }
