@@ -8,8 +8,9 @@ import { FuelLevelsModule } from './fuel-levels/fuel-levels.module';
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true,
-  }), TanksModule, FuelLevelsModule
-
+  }), 
+  TanksModule, 
+  FuelLevelsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

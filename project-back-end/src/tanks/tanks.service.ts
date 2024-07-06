@@ -18,6 +18,8 @@ export class TanksService {
       }
       throw err;
     });
+
+    return 'Tanque criado com sucesso';
   }
 
   async findAll() {

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { FuelLevelsService } from './fuel-levels.service';
 import { CreateFuelLevelDto } from './dto/create-fuel-level.dto';
 import { UpdateFuelLevelDto } from './dto/update-fuel-level.dto';
@@ -8,8 +8,8 @@ export class FuelLevelsController {
   constructor(private readonly fuelLevelsService: FuelLevelsService) {}
 
   @Post()
-  create(@Body() createFuelLevelDto: CreateFuelLevelDto) {
-    return this.fuelLevelsService.create(createFuelLevelDto);
+  create(@Body() data: CreateFuelLevelDto) {
+    return this.fuelLevelsService.create(data);
   }
 
   @Get()
@@ -17,18 +17,18 @@ export class FuelLevelsController {
     return this.fuelLevelsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.fuelLevelsService.findOne(+id);
+  @Get(':tank_id')
+  findMostRecent(@Param('tank_id', ParseIntPipe) tank_id: number) {
+    return this.fuelLevelsService.findMostRecent(tank_id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFuelLevelDto: UpdateFuelLevelDto) {
-    return this.fuelLevelsService.update(+id, updateFuelLevelDto);
-  }
+//   @Patch(':id')
+//   update(@Param('id') id: string, @Body() updateFuelLevelDto: UpdateFuelLevelDto) {
+//     return this.fuelLevelsService.update(+id, updateFuelLevelDto);
+//   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.fuelLevelsService.remove(+id);
-  }
+//   @Delete(':id')
+//   remove(@Param('id') id: string) {
+//     return this.fuelLevelsService.remove(+id);
+//   }
 }
