@@ -1,11 +1,7 @@
 #include <SPI.h>
 #include <RH_RF95.h>
 
-#define RFM95_CS 10
-#define RFM95_INT 2
-#define RFM95_RST 9
-
-RH_RF95 rf95(RFM95_CS, RFM95_INT);
+RH_RF95 rf95;
 
 void setup() {
   Serial.begin(9600);
