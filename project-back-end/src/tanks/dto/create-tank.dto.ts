@@ -3,7 +3,7 @@ import { TankEntity } from "../entities/tank.entity";
 
 export class CreateTankDto extends PickType(TankEntity, [
   'name',
-  'descripition',
+  'description',
   'area',
   'location',
   'is_active',

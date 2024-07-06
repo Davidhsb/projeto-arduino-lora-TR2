@@ -1,19 +1,65 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateTankDto } from './dto/create-tank.dto';
 import { UpdateTankDto } from './dto/update-tank.dto';
+import { PrismaService } from '../prisma.service';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 @Injectable()
 export class TanksService {
-  create(createTankDto: CreateTankDto) {
-    return 'This action adds a new tank';
+  constructor(private prisma: PrismaService) {}
+  async create(data: CreateTankDto) {
+    await this.prisma.tank.create({
+      data: {
+        ...data,
+      }
+    }).catch((err) => {
+      if (err instanceof PrismaClientKnownRequestError) {
+        throw new BadRequestException('Erro ao criar season');
+      }
+      throw err;
+    });
   }
 
-  findAll() {
-    return `This action returns all tanks`;
+  async findAll() {
+    return await this.prisma.tank.findMany({
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        area: true,
+        location: true,
+      },
+      where: {
+        is_active: true,
+      }
+    })
+    .catch((err) => {
+      if (err instanceof PrismaClientKnownRequestError) {
+        throw new BadRequestException('Erro ao buscar seasons');
+      }
+      throw err;
+    });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} tank`;
+  async findOne(id: number) {
+    return await this.prisma.tank.findUnique({
+      where: {
+        id: id,
+        is_active: true,
+      },
+      select: {
+        name: true,
+        description: true, 
+        area: true,
+        location: true,
+      }
+    })
+    .catch((err) => {
+      if (err instanceof PrismaClientKnownRequestError) {
+        throw new BadRequestException('Erro ao buscar season');
+      }
+      throw err;
+    });
   }
 
   update(id: number, updateTankDto: UpdateTankDto) {
