@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { FuelLevelsService } from './fuel-levels.service';
 import { CreateFuelLevelDto } from './dto/create-fuel-level.dto';
 import { UpdateFuelLevelDto } from './dto/update-fuel-level.dto';
@@ -22,13 +31,13 @@ export class FuelLevelsController {
     return this.fuelLevelsService.findMostRecent(tank_id);
   }
 
-//   @Patch(':id')
-//   update(@Param('id') id: string, @Body() updateFuelLevelDto: UpdateFuelLevelDto) {
-//     return this.fuelLevelsService.update(+id, updateFuelLevelDto);
-//   }
+  //   @Patch(':id')
+  //   update(@Param('id') id: string, @Body() updateFuelLevelDto: UpdateFuelLevelDto) {
+  //     return this.fuelLevelsService.update(+id, updateFuelLevelDto);
+  //   }
 
-//   @Delete(':id')
-//   remove(@Param('id') id: string) {
-//     return this.fuelLevelsService.remove(+id);
-//   }
+  //   @Delete(':id')
+  //   remove(@Param('id') id: string) {
+  //     return this.fuelLevelsService.remove(+id);
+  //   }
 }

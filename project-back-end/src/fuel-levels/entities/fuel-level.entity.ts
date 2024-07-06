@@ -1,7 +1,7 @@
-import { FuelLevel } from "@prisma/client";
-import { IsDate, IsNotEmpty, IsNumber } from "class-validator";
+import { FuelLevel } from '@prisma/client';
+import { IsDate, IsNotEmpty, IsNumber } from 'class-validator';
 
-export class FuelLevelEntity implements FuelLevel{
+export class FuelLevelEntity implements FuelLevel {
   @IsNumber()
   id: number;
 

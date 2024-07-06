@@ -4,13 +4,15 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TanksModule } from './tanks/tanks.module';
 import { FuelLevelsModule } from './fuel-levels/fuel-levels.module';
+import { scheduled } from 'rxjs';
 
 @Module({
-  imports: [ConfigModule.forRoot({
-    isGlobal: true,
-  }), 
-  TanksModule, 
-  FuelLevelsModule,
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    TanksModule,
+    FuelLevelsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
